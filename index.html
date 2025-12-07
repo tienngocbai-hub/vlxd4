@@ -1,0 +1,832 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>TUB Market — Sàn thương mại điện tử xây dựng xanh</title>
+  <meta name="description" content="Sàn TMĐT xây dựng xanh: vật liệu, thiết bị, nhà thầu & dự án. Mua nhanh — minh bạch — bền vững." />
+  <style>
+    :root{
+      /* Eco palette */
+      --bg: #f3fbf6;
+      --bg2:#e7f6ee;
+      --surface:#ffffff;
+      --text:#0f172a;
+      --muted:#475569;
+
+      --primary:#1b8d5a;    /* eco green */
+      --primary2:#0f6f46;   /* deeper green */
+      --accent:#1f6fb2;     /* blue to match logo */
+      --earth:#8b6a4f;      /* earthy brown */
+      --border: rgba(15, 23, 42, .10);
+
+      --shadow: 0 14px 30px rgba(2, 8, 23, .10);
+      --radius: 18px;
+      --radius2: 26px;
+      --max: 1180px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text);
+      background:
+        radial-gradient(900px 450px at 15% 10%, rgba(27,141,90,.20), transparent 55%),
+        radial-gradient(900px 450px at 85% 5%, rgba(31,111,178,.18), transparent 55%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+    }
+
+    a{color:inherit; text-decoration:none}
+    .container{max-width:var(--max); margin:0 auto; padding:0 18px}
+
+    /* Top bar */
+    .topbar{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(10px);
+      background: rgba(243,251,246,.75);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 0;
+      gap:14px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px;
+      min-width: 200px;
+    }
+    .brand img{
+      width:44px; height:44px; object-fit:contain;
+      border-radius:12px;
+      background: #fff;
+      border: 1px solid var(--border);
+      padding:6px;
+    }
+    .brand .name{
+      display:flex; flex-direction:column; line-height:1.1;
+    }
+    .brand .name b{font-size:16px}
+    .brand .name small{color:var(--muted)}
+
+    .navlinks{display:flex; align-items:center; gap:18px}
+    .navlinks a{
+      color:var(--muted);
+      font-weight:600;
+      padding:10px 10px;
+      border-radius:12px;
+    }
+    .navlinks a:hover{background:rgba(27,141,90,.10); color:var(--primary2)}
+    .actions{display:flex; gap:10px; align-items:center}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      padding:11px 14px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      box-shadow: 0 8px 20px rgba(2,8,23,.06);
+      font-weight:700;
+      cursor:pointer;
+      transition: transform .08s ease, background .2s ease;
+      user-select:none;
+      white-space:nowrap;
+    }
+    .btn:hover{background: rgba(27,141,90,.08)}
+    .btn:active{transform: translateY(1px)}
+    .btn.primary{
+      border-color: rgba(27,141,90,.35);
+      background: linear-gradient(180deg, rgba(27,141,90,.98), rgba(15,111,70,.98));
+      color:#fff;
+    }
+    .btn.primary:hover{filter: brightness(1.02)}
+    .iconbtn{
+      width:44px; height:44px; padding:0;
+      border-radius: 14px;
+    }
+
+    /* Mobile menu */
+    .hamburger{display:none}
+    .mobilepanel{
+      display:none;
+      padding: 10px 0 16px;
+    }
+    .mobilepanel a{
+      display:block;
+      padding:12px 12px;
+      border-radius: 14px;
+      color: var(--muted);
+      font-weight:700;
+    }
+    .mobilepanel a:hover{background: rgba(31,111,178,.08); color: var(--accent)}
+
+    /* Hero */
+    .hero{padding:30px 0 18px}
+    .heroGrid{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:18px;
+      align-items:stretch;
+    }
+    .card{
+      background: rgba(255,255,255,.90);
+      border: 1px solid var(--border);
+      border-radius: var(--radius2);
+      box-shadow: var(--shadow);
+    }
+    .heroLeft{padding:26px}
+    .kicker{
+      display:inline-flex; align-items:center; gap:10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(27,141,90,.12);
+      border: 1px solid rgba(27,141,90,.22);
+      color: var(--primary2);
+      font-weight:800;
+      font-size: 13px;
+    }
+    .h1{
+      margin:14px 0 10px;
+      font-size: 40px;
+      line-height:1.08;
+      letter-spacing: -0.02em;
+    }
+    .h1 span{color:var(--primary)}
+    .sub{
+      margin:0;
+      color:var(--muted);
+      font-size: 16px;
+      line-height:1.6;
+      max-width: 58ch;
+    }
+
+    .search{
+      margin-top:18px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .field{
+      flex:1;
+      min-width: 240px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding: 12px 14px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+    }
+    .field input{
+      border:0; outline:0;
+      width:100%;
+      font-size: 15px;
+      background: transparent;
+    }
+    .chips{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px}
+    .chip{
+      padding: 9px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.85);
+      color: var(--muted);
+      font-weight:700;
+      cursor:pointer;
+    }
+    .chip:hover{border-color: rgba(27,141,90,.35); color: var(--primary2); background: rgba(27,141,90,.08)}
+
+    .heroRight{padding:18px}
+    .miniGrid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+    }
+    .mini{
+      padding:14px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.85);
+      min-height: 108px;
+    }
+    .mini b{display:block; margin-bottom:6px}
+    .mini p{margin:0; color:var(--muted); font-size:14px; line-height:1.5}
+    .tag{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border:1px solid rgba(31,111,178,.25);
+      background: rgba(31,111,178,.10);
+      color: var(--accent);
+      font-weight:800;
+      font-size:12px;
+      margin-bottom:10px;
+    }
+
+    /* Sections */
+    section{padding: 18px 0}
+    .sectionHead{
+      display:flex; align-items:flex-end; justify-content:space-between;
+      gap:14px; margin-bottom: 12px;
+    }
+    .sectionHead h2{
+      margin:0; font-size: 22px; letter-spacing:-0.01em;
+    }
+    .sectionHead p{margin:0; color:var(--muted)}
+    .grid3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .grid4{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .cat, .product, .proj{
+      padding: 14px;
+      border-radius: var(--radius2);
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.90);
+      box-shadow: 0 10px 24px rgba(2,8,23,.06);
+    }
+    .cat .emoji{
+      width:44px; height:44px; border-radius: 14px;
+      display:flex; align-items:center; justify-content:center;
+      background: rgba(27,141,90,.10);
+      border: 1px solid rgba(27,141,90,.22);
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+    .muted{color:var(--muted)}
+    .row{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:10px;
+    }
+    .badgeEco{
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 900;
+      border: 1px solid rgba(27,141,90,.30);
+      background: rgba(27,141,90,.12);
+      color: var(--primary2);
+      white-space: nowrap;
+    }
+    .price{
+      font-weight: 900;
+      letter-spacing: -0.01em;
+    }
+    .thumb{
+      height: 120px;
+      border-radius: 16px;
+      border: 1px dashed rgba(15, 23, 42, .18);
+      background:
+        radial-gradient(280px 140px at 20% 10%, rgba(27,141,90,.18), transparent 60%),
+        radial-gradient(280px 140px at 80% 0%, rgba(31,111,178,.15), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.95), rgba(243,251,246,.95));
+      display:flex; align-items:center; justify-content:center;
+      color: rgba(71, 85, 105, .85);
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+    .product h3, .proj h3{margin:6px 0 8px; font-size: 16px}
+    .product p, .proj p{margin:0; color:var(--muted); font-size: 14px; line-height: 1.55}
+    .actions2{
+      display:flex; gap:10px; margin-top: 12px; flex-wrap:wrap;
+    }
+
+    /* Sustainability banner */
+    .sustain{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      align-items:stretch;
+    }
+    .sustain .left{padding:18px}
+    .sustain ul{margin:10px 0 0; padding-left: 18px; color:var(--muted); line-height:1.7}
+    .sustain .right{
+      padding:18px;
+      background:
+        radial-gradient(500px 240px at 70% 20%, rgba(27,141,90,.22), transparent 60%),
+        radial-gradient(500px 240px at 30% 0%, rgba(31,111,178,.16), transparent 60%),
+        rgba(255,255,255,.88);
+      border-radius: var(--radius2);
+      border: 1px solid var(--border);
+    }
+    .stat{
+      display:flex; gap:12px; align-items:flex-start;
+      padding: 12px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.72);
+      border: 1px solid var(--border);
+      margin-bottom: 10px;
+    }
+    .stat b{font-size: 18px}
+    .stat small{display:block; color:var(--muted); margin-top: 4px}
+
+    /* Footer */
+    footer{
+      padding: 26px 0 34px;
+      border-top: 1px solid var(--border);
+      margin-top: 10px;
+      background: rgba(255,255,255,.65);
+    }
+    .foot{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr .8fr .8fr;
+      gap: 14px;
+    }
+    .foot h4{margin:0 0 10px}
+    .foot a{display:block; padding: 7px 0; color:var(--muted); font-weight:700}
+    .foot a:hover{color: var(--primary2)}
+    .copyright{
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .heroGrid{grid-template-columns: 1fr; }
+      .grid4{grid-template-columns: repeat(2, 1fr)}
+      .grid3{grid-template-columns: 1fr}
+      .sustain{grid-template-columns: 1fr}
+      .foot{grid-template-columns: 1fr 1fr}
+    }
+    @media (max-width: 720px){
+      .navlinks{display:none}
+      .hamburger{display:inline-flex}
+      .mobilepanel{display:none}
+      .grid4{grid-template-columns: 1fr}
+      .h1{font-size: 34px}
+      .brand{min-width:auto}
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="container">
+      <div class="nav">
+        <a class="brand" href="#">
+          <!-- ĐỔI THÀNH LOGO CỦA BẠN: đặt file logo.png cùng thư mục -->
+          <img src="logo.png" alt="TUB logo" />
+          <div class="name">
+            <b>TUB Market</b>
+            <small>Sàn TMĐT xây dựng xanh</small>
+          </div>
+        </a>
+
+        <nav class="navlinks" aria-label="Điều hướng">
+          <a href="#danhmuc">Danh mục</a>
+          <a href="#sanpham">Sản phẩm</a>
+          <a href="#nhathau">Nhà thầu & Dự án</a>
+          <a href="#benvung">Bền vững</a>
+          <a href="#lienhe">Liên hệ</a>
+        </nav>
+
+        <div class="actions">
+          <button class="btn iconbtn hamburger" id="btnMenu" aria-label="Mở menu">
+            ☰
+          </button>
+          <a class="btn" href="#nhathau">Đăng dự án</a>
+          <a class="btn primary" href="#sanpham">Mua ngay</a>
+        </div>
+      </div>
+
+      <div class="mobilepanel" id="mobilePanel">
+        <a href="#danhmuc">Danh mục</a>
+        <a href="#sanpham">Sản phẩm</a>
+        <a href="#nhathau">Nhà thầu & Dự án</a>
+        <a href="#benvung">Bền vững</a>
+        <a href="#lienhe">Liên hệ</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="container">
+      <div class="heroGrid">
+        <div class="card heroLeft">
+          <div class="kicker">🌱 Xây dựng bền vững • Minh bạch giá • Giao nhanh</div>
+          <h1 class="h1">Nơi mua bán <span>vật liệu xây dựng</span> & kết nối <span>nhà thầu</span> theo hướng xanh</h1>
+          <p class="sub">
+            Tìm vật liệu, thiết bị, dịch vụ thi công — ưu tiên sản phẩm có chứng chỉ/tiêu chuẩn môi trường.
+            Đăng dự án để nhận báo giá từ nhà thầu uy tín.
+          </p>
+
+          <div class="search" role="search" aria-label="Tìm kiếm">
+            <div class="field">
+              🔎
+              <input id="q" type="text" placeholder="Tìm: xi măng, gạch, thép, sơn sinh thái, đèn năng lượng..." />
+            </div>
+            <button class="btn primary" id="btnSearch">Tìm kiếm</button>
+            <button class="btn" id="btnFilter">Bộ lọc</button>
+          </div>
+
+          <div class="chips" aria-label="Gợi ý nhanh">
+            <button class="chip" data-q="Sơn sinh thái">Sơn sinh thái</button>
+            <button class="chip" data-q="Gạch không nung">Gạch không nung</button>
+            <button class="chip" data-q="Tấm cách nhiệt">Tấm cách nhiệt</button>
+            <button class="chip" data-q="Đèn năng lượng mặt trời">Đèn NLMT</button>
+            <button class="chip" data-q="Thi công nhà phố">Thi công nhà phố</button>
+          </div>
+          <p class="muted" id="searchResult" style="margin:12px 0 0;"></p>
+        </div>
+
+        <div class="card heroRight">
+          <div class="miniGrid">
+            <div class="mini">
+              <div class="tag">✅ Nhà cung cấp</div>
+              <b>Xác minh & đánh giá</b>
+              <p>Hồ sơ doanh nghiệp, năng lực, chứng chỉ, lịch sử giao hàng.</p>
+            </div>
+            <div class="mini">
+              <div class="tag">💬 Báo giá nhanh</div>
+              <b>So sánh minh bạch</b>
+              <p>Nhận nhiều báo giá, lọc theo giá, vị trí, thời gian giao.</p>
+            </div>
+            <div class="mini">
+              <div class="tag">🏗️ Nhà thầu</div>
+              <b>Đăng dự án</b>
+              <p>Chia sẻ khối lượng, tiến độ, ngân sách để nhận đề xuất.</p>
+            </div>
+            <div class="mini">
+              <div class="tag">🌿 Chứng chỉ xanh</div>
+              <b>Ưu tiên bền vững</b>
+              <p>Gắn nhãn eco, khuyến nghị vật liệu giảm phát thải.</p>
+            </div>
+          </div>
+          <div style="margin-top:12px" class="mini">
+            <b>Cam kết “Xây dựng xanh”</b>
+            <p class="muted" style="margin-top:6px">
+              TUB Market khuyến khích lựa chọn vật liệu thân thiện môi trường và tối ưu vận chuyển nhằm giảm phát thải.
+            </p>
+            <div class="actions2">
+              <a class="btn" href="#benvung">Tìm hiểu thêm</a>
+              <a class="btn primary" href="#nhathau">Đăng dự án ngay</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Categories -->
+  <section id="danhmuc">
+    <div class="container">
+      <div class="sectionHead">
+        <div>
+          <h2>Danh mục nổi bật</h2>
+          <p class="muted">Chọn theo nhu cầu công trình — ưu tiên lựa chọn thân thiện môi trường.</p>
+        </div>
+        <a class="btn" href="#sanpham">Xem tất cả</a>
+      </div>
+
+      <div class="grid4">
+        <div class="cat">
+          <div class="emoji">🧱</div>
+          <div class="row"><b>Vật liệu thô</b><span class="badgeEco">Eco</span></div>
+          <p class="muted">Xi măng, cát đá, gạch, thép…</p>
+        </div>
+        <div class="cat">
+          <div class="emoji">🎨</div>
+          <div class="row"><b>Hoàn thiện</b><span class="badgeEco">Low-VOC</span></div>
+          <p class="muted">Sơn sinh thái, gạch ốp lát, nội thất…</p>
+        </div>
+        <div class="cat">
+          <div class="emoji">⚡</div>
+          <div class="row"><b>Điện & Năng lượng</b><span class="badgeEco">Green</span></div>
+          <p class="muted">Đèn NLMT, thiết bị tiết kiệm điện…</p>
+        </div>
+        <div class="cat">
+          <div class="emoji">🧰</div>
+          <div class="row"><b>Thiết bị & Máy móc</b><span class="badgeEco">Hiệu suất</span></div>
+          <p class="muted">Máy cắt, khoan, giàn giáo, vận thăng…</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products -->
+  <section id="sanpham">
+    <div class="container">
+      <div class="sectionHead">
+        <div>
+          <h2>Sản phẩm gợi ý</h2>
+          <p class="muted">Mẫu demo — bạn thay dữ liệu thật sau (API/Database) là chạy được.</p>
+        </div>
+        <div class="actions2">
+          <button class="btn" id="sortPrice">Sắp xếp theo giá</button>
+          <button class="btn" id="sortEco">Ưu tiên Eco</button>
+        </div>
+      </div>
+
+      <div class="grid3" id="productGrid"></div>
+    </div>
+  </section>
+
+  <!-- Contractor / Projects -->
+  <section id="nhathau">
+    <div class="container">
+      <div class="sectionHead">
+        <div>
+          <h2>Nhà thầu & Dự án</h2>
+          <p class="muted">Đăng dự án để nhận đề xuất thi công — kèm tiêu chí “xanh”.</p>
+        </div>
+        <a class="btn primary" href="#lienhe">Đăng dự án</a>
+      </div>
+
+      <div class="grid3">
+        <div class="proj">
+          <div class="thumb">Dự án #A102</div>
+          <div class="row">
+            <b>Nhà phố 3 tầng • 120m²</b>
+            <span class="badgeEco">Ưu tiên Eco</span>
+          </div>
+          <p>Hạng mục: phần thô + hoàn thiện. Yêu cầu: sơn low-VOC, tối ưu cách nhiệt.</p>
+          <div class="actions2">
+            <a class="btn" href="#lienhe">Gửi báo giá</a>
+            <a class="btn" href="#">Xem chi tiết</a>
+          </div>
+        </div>
+
+        <div class="proj">
+          <div class="thumb">Dự án #B214</div>
+          <div class="row">
+            <b>Kho xưởng • 800m²</b>
+            <span class="badgeEco">Tiết kiệm năng lượng</span>
+          </div>
+          <p>Hạng mục: khung thép + mái. Yêu cầu: tấm cách nhiệt, thông gió tự nhiên.</p>
+          <div class="actions2">
+            <a class="btn" href="#lienhe">Gửi hồ sơ</a>
+            <a class="btn" href="#">Xem chi tiết</a>
+          </div>
+        </div>
+
+        <div class="proj">
+          <div class="thumb">Dự án #C076</div>
+          <div class="row">
+            <b>Cải tạo căn hộ • 65m²</b>
+            <span class="badgeEco">Low-VOC</span>
+          </div>
+          <p>Hạng mục: cải tạo nội thất, điện nước. Yêu cầu: vật liệu ít mùi, an toàn sức khỏe.</p>
+          <div class="actions2">
+            <a class="btn" href="#lienhe">Nhận việc</a>
+            <a class="btn" href="#">Xem chi tiết</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sustainability -->
+  <section id="benvung">
+    <div class="container">
+      <div class="sectionHead">
+        <div>
+          <h2>Góc bền vững</h2>
+          <p class="muted">Thiết kế theo chủ đề môi trường: giảm phát thải — tiết kiệm năng lượng — vật liệu xanh.</p>
+        </div>
+      </div>
+
+      <div class="sustain">
+        <div class="card left">
+          <div style="padding:18px">
+            <div class="kicker" style="background:rgba(31,111,178,.12); border-color:rgba(31,111,178,.22); color:var(--accent)">
+              ♻️ Tiêu chí gợi ý trên sàn
+            </div>
+            <ul>
+              <li>Gắn nhãn “Eco” cho sản phẩm có chứng chỉ/tiêu chuẩn hoặc cam kết vật liệu thân thiện môi trường.</li>
+              <li>Ưu tiên lựa chọn ít VOC, giảm mùi, an toàn cho sức khỏe.</li>
+              <li>Tối ưu vận chuyển theo cụm công trình để giảm phát thải.</li>
+              <li>Khuyến nghị giải pháp tiết kiệm năng lượng (cách nhiệt, chiếu sáng, NLMT).</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="right">
+          <div class="stat">
+            <div style="font-size:22px">🌿</div>
+            <div>
+              <b>Eco Score (demo)</b>
+              <small>Chấm điểm theo nhãn Eco, vận chuyển, vật liệu ít VOC.</small>
+            </div>
+          </div>
+          <div class="stat">
+            <div style="font-size:22px">📦</div>
+            <div>
+              <b>Gợi ý gom đơn</b>
+              <small>Gom nhà cung cấp gần công trình để giảm chi phí & phát thải.</small>
+            </div>
+          </div>
+          <div class="stat">
+            <div style="font-size:22px">🏷️</div>
+            <div>
+              <b>Nhãn minh bạch</b>
+              <small>Hiển thị chứng chỉ, thành phần, bảo hành và nguồn gốc.</small>
+            </div>
+          </div>
+
+          <div class="actions2" style="margin-top:10px">
+            <a class="btn primary" href="#sanpham">Xem sản phẩm Eco</a>
+            <a class="btn" href="#lienhe">Hợp tác nhà cung cấp</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact / CTA -->
+  <section id="lienhe">
+    <div class="container">
+      <div class="card" style="padding:18px">
+        <div class="sectionHead" style="margin-bottom:8px">
+          <div>
+            <h2>Liên hệ & Đăng ký đối tác</h2>
+            <p class="muted">Form demo (chưa gửi server). Bạn có thể nối API sau.</p>
+          </div>
+        </div>
+
+        <div class="grid3">
+          <div class="field" style="min-width:auto">
+            👤 <input id="name" placeholder="Họ tên / Doanh nghiệp" />
+          </div>
+          <div class="field" style="min-width:auto">
+            📞 <input id="phone" placeholder="Số điện thoại" />
+          </div>
+          <div class="field" style="min-width:auto">
+            ✉️ <input id="email" placeholder="Email" />
+          </div>
+        </div>
+
+        <div class="field" style="margin-top:12px">
+          📝 <input id="msg" placeholder="Bạn muốn: mua hàng / đăng dự án / trở thành nhà cung cấp / nhà thầu..." />
+        </div>
+
+        <div class="actions2">
+          <button class="btn primary" id="btnSubmit">Gửi thông tin</button>
+          <button class="btn" id="btnDemoFill">Điền nhanh (demo)</button>
+          <span class="muted" id="formStatus"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="foot">
+        <div>
+          <div class="brand" style="margin-bottom:10px">
+            <img src="logo.png" alt="TUB logo" />
+            <div class="name">
+              <b>TUB Market</b>
+              <small>Build green. Build smart.</small>
+            </div>
+          </div>
+          <p class="muted" style="margin:0; line-height:1.7">
+            Sàn TMĐT xây dựng theo hướng bền vững: kết nối nhà cung cấp, nhà thầu và chủ đầu tư.
+          </p>
+          <p class="copyright">© <span id="year"></span> TUB Market. All rights reserved.</p>
+        </div>
+
+        <div>
+          <h4>Khám phá</h4>
+          <a href="#danhmuc">Danh mục</a>
+          <a href="#sanpham">Sản phẩm</a>
+          <a href="#nhathau">Nhà thầu & Dự án</a>
+          <a href="#benvung">Bền vững</a>
+        </div>
+
+        <div>
+          <h4>Đối tác</h4>
+          <a href="#lienhe">Nhà cung cấp</a>
+          <a href="#lienhe">Nhà thầu</a>
+          <a href="#lienhe">Chính sách Eco</a>
+          <a href="#lienhe">Hỗ trợ kỹ thuật</a>
+        </div>
+
+        <div>
+          <h4>Liên hệ</h4>
+          <a href="#">Hotline: 0xxx xxx xxx</a>
+          <a href="#">Email: contact@tubmarket.vn</a>
+          <a href="#">Địa chỉ: (bạn cập nhật)</a>
+          <a href="#">Giờ làm việc: 8:00–18:00</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ====== Mobile menu ======
+    const btnMenu = document.getElementById('btnMenu');
+    const mobilePanel = document.getElementById('mobilePanel');
+    btnMenu?.addEventListener('click', () => {
+      const open = mobilePanel.style.display === 'block';
+      mobilePanel.style.display = open ? 'none' : 'block';
+    });
+
+    // ====== Demo products data ======
+    const products = [
+      { id: 1, name: "Sơn nội thất Low-VOC (18L)", desc: "Ít mùi, thân thiện môi trường, độ phủ cao.", price: 890000, eco: 5, tag: "Low-VOC" },
+      { id: 2, name: "Gạch không nung (block) — 1 pallet", desc: "Giảm phát thải so với gạch nung truyền thống.", price: 1250000, eco: 5, tag: "Eco" },
+      { id: 3, name: "Tấm cách nhiệt PU — 10m²", desc: "Giảm thất thoát nhiệt, tiết kiệm điện.", price: 990000, eco: 4, tag: "Tiết kiệm" },
+      { id: 4, name: "Đèn năng lượng mặt trời 300W", desc: "Chiếu sáng sân vườn/công trình, lắp nhanh.", price: 1350000, eco: 5, tag: "Green" },
+      { id: 5, name: "Xi măng PCB40 — 50kg", desc: "Phù hợp công trình dân dụng, ổn định chất lượng.", price: 98000, eco: 2, tag: "Phổ biến" },
+      { id: 6, name: "Thép xây dựng CB400 — 1 bó", desc: "Đủ chứng nhận, hỗ trợ giao công trình.", price: 2450000, eco: 2, tag: "Chuẩn" },
+    ];
+
+    const grid = document.getElementById('productGrid');
+
+    function formatVND(n){
+      return n.toLocaleString('vi-VN') + "₫";
+    }
+
+    function render(list){
+      grid.innerHTML = "";
+      list.forEach(p => {
+        const el = document.createElement('div');
+        el.className = "product";
+        el.innerHTML = `
+          <div class="thumb">Hình ảnh sản phẩm</div>
+          <div class="row">
+            <span class="badgeEco">${p.tag}</span>
+            <span class="price">${formatVND(p.price)}</span>
+          </div>
+          <h3>${p.name}</h3>
+          <p>${p.desc}</p>
+          <div class="actions2">
+            <button class="btn" onclick="alert('Đã thêm vào giỏ (demo)')">🛒 Thêm giỏ</button>
+            <button class="btn primary" onclick="alert('Chuyển đến thanh toán (demo)')">Mua ngay</button>
+          </div>
+        `;
+        grid.appendChild(el);
+      });
+    }
+
+    render(products);
+
+    // ====== Search / chips ======
+    const q = document.getElementById('q');
+    const result = document.getElementById('searchResult');
+
+    function doSearch(query){
+      const kw = (query || "").trim().toLowerCase();
+      const filtered = !kw ? products : products.filter(p =>
+        (p.name + " " + p.desc + " " + p.tag).toLowerCase().includes(kw)
+      );
+      render(filtered);
+      result.textContent = kw
+        ? `Kết quả cho: "${query}" — ${filtered.length} sản phẩm (demo)`
+        : `Hiển thị ${filtered.length} sản phẩm (demo)`;
+    }
+
+    document.getElementById('btnSearch').addEventListener('click', () => doSearch(q.value));
+    q.addEventListener('keydown', (e) => { if(e.key === 'Enter') doSearch(q.value); });
+
+    document.querySelectorAll('.chip').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const v = btn.getAttribute('data-q');
+        q.value = v;
+        doSearch(v);
+      });
+    });
+
+    // ====== Sorting ======
+    document.getElementById('sortPrice').addEventListener('click', () => {
+      const sorted = [...products].sort((a,b) => a.price - b.price);
+      render(sorted);
+      result.textContent = "Đã sắp xếp theo giá tăng dần (demo).";
+    });
+    document.getElementById('sortEco').addEventListener('click', () => {
+      const sorted = [...products].sort((a,b) => b.eco - a.eco);
+      render(sorted);
+      result.textContent = "Đã ưu tiên sản phẩm Eco Score cao (demo).";
+    });
+
+    document.getElementById('btnFilter').addEventListener('click', () => {
+      alert("Bộ lọc (demo): bạn có thể thêm lọc theo tỉnh/thành, khoảng giá, chứng chỉ, thời gian giao…");
+    });
+
+    // ====== Contact form demo ======
+    const status = document.getElementById('formStatus');
+    document.getElementById('btnDemoFill').addEventListener('click', () => {
+      document.getElementById('name').value = "Công ty ABC";
+      document.getElementById('phone').value = "09xx xxx xxx";
+      document.getElementById('email').value = "abc@email.com";
+      document.getElementById('msg').value = "Tôi muốn trở thành nhà cung cấp vật liệu eco.";
+      status.textContent = "";
+    });
+    document.getElementById('btnSubmit').addEventListener('click', () => {
+      status.textContent = "✅ Đã ghi nhận (demo). Bạn nối API để lưu dữ liệu thật.";
+    });
+
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
